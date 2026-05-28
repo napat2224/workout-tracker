@@ -1,0 +1,11 @@
+CLAUDE.md
+.claude
+
+dev.md
+
+node_modules/
+.next/
+out/
+next-env.d.ts
+
+.DS_Store

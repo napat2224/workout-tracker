@@ -1,0 +1,32 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "Workout Tracker",
+  "version": "0.1.0",
+  "identifier": "com.workout-tracker",
+  "build": {
+    "beforeDevCommand": "npm run next:dev",
+    "devUrl": "http://localhost:3000",
+    "beforeBuildCommand": "npm run next:build",
+    "frontendDist": "../out"
+  },
+  "app": {
+    "withGlobalTauri": false,
+    "windows": [
+      {
+        "title": "Workout Tracker",
+        "width": 1100,
+        "height": 720,
+        "minWidth": 820,
+        "minHeight": 580
+      }
+    ],
+    "security": {
+      "csp": null
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "icon": []
+  }
+}

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Workout Tracker</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <span class="logo-icon">🏋️</span>
+      <span class="logo-text">Workout</span>
+    </div>
+    <nav>
+      <button class="nav-btn active" data-view="dashboard">
+        <span class="nav-icon">⊞</span> Dashboard
+      </button>
+      <button class="nav-btn" data-view="log">
+        <span class="nav-icon">＋</span> Log Workout
+      </button>
+      <button class="nav-btn" data-view="history">
+        <span class="nav-icon">☰</span> History
+      </button>
+      <button class="nav-btn" data-view="progress">
+        <span class="nav-icon">↑</span> Progress
+      </button>
+    </nav>
+  </aside>
+
+  <main class="content">
+
+    <!-- Dashboard -->
+    <section id="view-dashboard" class="view active">
+      <div class="page-header">
+        <h1>Dashboard</h1>
+        <span class="date-badge" id="today-date"></span>
+      </div>
+      <div class="stats-row" id="stats-row">
+        <div class="stat-card">
+          <div class="stat-value" id="stat-total">—</div>
+          <div class="stat-label">Total Workouts</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="stat-week">—</div>
+          <div class="stat-label">This Week</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="stat-streak">—</div>
+          <div class="stat-label">Day Streak</div>
+        </div>
+      </div>
+      <div class="section-header">
+        <h2>Recent Workouts</h2>
+        <button class="btn-primary" id="start-workout-btn">+ Start Workout</button>
+      </div>
+      <div id="recent-workouts" class="workout-list"></div>
+    </section>
+
+    <!-- Log Workout -->
+    <section id="view-log" class="view">
+      <div class="page-header">
+        <h1 id="log-title">New Workout</h1>
+        <button class="btn-ghost" id="cancel-workout-btn">✕ Cancel</button>
+      </div>
+      <div class="workout-form-header" id="workout-form-header">
+        <input id="workout-name" class="input-large" type="text" placeholder="Workout name (e.g. Push Day)" />
+        <input id="workout-date" class="input-medium" type="date" />
+        <input id="workout-notes" class="input-medium" type="text" placeholder="Notes (optional)" />
+        <button class="btn-primary" id="save-workout-meta-btn">Save</button>
+      </div>
+
+      <div id="workout-editor" class="hidden">
+        <div id="exercise-list" class="exercise-list"></div>
+        <div class="add-exercise-row">
+          <input id="new-exercise-name" class="input-medium" type="text"
+                 placeholder="Exercise name" list="exercise-suggestions" autocomplete="off" />
+          <datalist id="exercise-suggestions"></datalist>
+          <button class="btn-secondary" id="add-exercise-btn">Add Exercise</button>
+        </div>
+        <div class="finish-row">
+          <button class="btn-primary btn-large" id="finish-workout-btn">Finish Workout</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- History -->
+    <section id="view-history" class="view">
+      <div class="page-header">
+        <h1>History</h1>
+        <input class="input-search" id="history-search" type="text" placeholder="Search workouts…" />
+      </div>
+      <div id="history-list" class="workout-list"></div>
+    </section>
+
+    <!-- Progress -->
+    <section id="view-progress" class="view">
+      <div class="page-header">
+        <h1>Progress</h1>
+      </div>
+      <div class="progress-search-row">
+        <input class="input-medium" id="progress-exercise-input" type="text"
+               placeholder="Search exercise…" list="progress-suggestions" autocomplete="off" />
+        <datalist id="progress-suggestions"></datalist>
+        <button class="btn-primary" id="load-progress-btn">View Progress</button>
+      </div>
+      <div id="progress-content"></div>
+    </section>
+
+  </main>
+
+  <!-- Modal: Workout Detail -->
+  <div id="detail-modal" class="modal-overlay hidden">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 id="modal-workout-title"></h2>
+        <div class="modal-header-meta">
+          <span id="modal-workout-date" class="date-badge"></span>
+          <button class="btn-ghost" id="modal-close-btn">✕</button>
+        </div>
+      </div>
+      <div id="modal-exercises" class="modal-body"></div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
