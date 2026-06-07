@@ -3,9 +3,14 @@ CLAUDE.md
 
 dev.md
 
+# Next.js
 node_modules/
 .next/
 out/
 next-env.d.ts
+
+# Rust / Tauri build output
+src-tauri/target/
+src-tauri/gen/
 
 .DS_Store
