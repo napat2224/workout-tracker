@@ -1,0 +1,15 @@
+build
+
+    "dependsOn": ["^build"]: "Build shared helper packages first before building the apps that use them."
+
+    "outputs": ["dist/**", ".next/**"]: "Remember these output folders. If I didn't change any code, just grab them from the cache instantly instead of rebuilding."
+
+dev
+
+    "cache": false: "Don't cache local dev servers. I want real-time live reloads."
+
+    "persistent": true: "This process stays open indefinitely, so don't freeze the terminal waiting for it to finish."
+
+lint
+
+    {}: "Just run pnpm lint everywhere at the exact same time."

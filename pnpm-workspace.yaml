@@ -1,0 +1,8 @@
+packages:
+  - "apps/*"
+  - "packages/*"
+
+# Build scripts are blocked by default in pnpm; these are the ones this repo trusts.
+allowBuilds:
+  unrs-resolver: true
+  sharp: true
