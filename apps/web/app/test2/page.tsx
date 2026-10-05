@@ -1,8 +1,6 @@
 import { connection } from 'next/server';
 import type { SessionDetail, WorkoutSet } from '@workout/shared-types';
 import { api } from '@/lib/api';
-import { deleteSessionAction } from './actions';
-import { NewSessionForm } from './new-session-form';
 
 /**
  * Server Component: this `await` runs on the Next.js server and hits Nest over
@@ -43,9 +41,6 @@ export default async function Home() {
         </div>
       ) : (
         <>
-          <section className="mb-10">
-            <NewSessionForm />
-          </section>
 
           <section className="space-y-4">
             {sessions.length === 0 ? (
@@ -76,15 +71,6 @@ function SessionCard({ session }: { session: SessionDetail }) {
             {session.exercises.length} exercises · {totalSets} sets
           </p>
         </div>
-        <form action={deleteSessionAction}>
-          <input type="hidden" name="id" value={session.id} />
-          <button
-            type="submit"
-            className="text-sm text-black/50 underline-offset-4 hover:underline dark:text-white/50"
-          >
-            Delete
-          </button>
-        </form>
       </div>
 
       {session.exercises.length > 0 ? (

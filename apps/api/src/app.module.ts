@@ -1,4 +1,6 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
+import { validateEnv } from './common/env';
 import { SeedService } from './common/seed.service';
 import { StoreModule } from './common/store.module';
 import { ExerciseDefsModule } from './modules/exercise-defs/exercise-defs.module';
@@ -13,6 +15,13 @@ import { SetsModule } from './modules/sets/sets.module';
  */
 @Module({
   imports: [
+    // Reads apps/api/.env, validates it against the Env class, and exposes
+    // ConfigService everywhere without re-importing this module.
+    ConfigModule.forRoot({
+      isGlobal: true,
+      cache: true,
+      validate: validateEnv,
+    }),
     StoreModule,
     HealthModule,
     ExerciseDefsModule,

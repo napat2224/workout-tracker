@@ -1,4 +1,6 @@
 import { Injectable, Logger, OnApplicationBootstrap } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
+import type { Env } from './env';
 import { ExerciseDefsService } from '../modules/exercise-defs/exercise-defs.service';
 import { ExercisesService } from '../modules/exercises/exercises.service';
 import { SessionsService } from '../modules/sessions/sessions.service';
@@ -7,13 +9,14 @@ import { SetsService } from '../modules/sets/sets.service';
 /**
  * The store is in-memory, so every restart begins empty. This puts one
  * realistic workout in place so the web app has something to render.
- * Disable with `SEED_DATA=false`.
+ * Disable with `SEED_DATA=false` in apps/api/.env.
  */
 @Injectable()
 export class SeedService implements OnApplicationBootstrap {
   private readonly logger = new Logger(SeedService.name);
 
   constructor(
+    private readonly config: ConfigService<Env, true>,
     private readonly sessions: SessionsService,
     private readonly exercises: ExercisesService,
     private readonly exerciseDefs: ExerciseDefsService,
@@ -21,7 +24,7 @@ export class SeedService implements OnApplicationBootstrap {
   ) {}
 
   onApplicationBootstrap(): void {
-    if (process.env.SEED_DATA === 'false') return;
+    if (!this.config.get('SEED_DATA', { infer: true })) return;
 
     const bench = this.exerciseDefs.create({
       name: 'Bench Press',
